@@ -1,43 +1,23 @@
 const getFile = require('./getFile');
-const envObj = require('../env')
+const sql = require('../dbConnection')
 
-function connectMSSQL(req, res) {
-  const sql = require('mssql');
-
+async function connectMSSQL(req, res) {
   // get file content
   const insertData = getFile()
-
-  // ! DB連線
-  const config = {
-    user:'app_yesgo',
-    password:envObj.DB_CONFIG_PWD,
-    server:envObj.DB_CONFIG_SERVER,
-    database:'YesgoMarket',
-    options: {
-        rustedConnection: true,
-        encrypt: false,
-        enableArithAbort: true,
-        trustServerCertificate: true
+  try{
+    await sql.dbConnection()
+    insertData.forEach(async(item) => {
+      await sql.query(`insert into SODInformation values ('${item.FTPFileName}', '${item.OBTNumber}', '${item.OrderNo}', '${item.ProductNo}', '${item.MappingSTDNo}', '${item.STDNo}', '${item.StatusID}', '${item.StatusDescription}', '${item.GoodsEnterDate}', '${item.CreateDate}')`)
+      console.log('insert success!')
+    })
+    if (req) {
+      const result = await sql.query('select * from SODInformation where cast(GoodsEnterDate as date) = cast( getdate() as date )')
+      res.send(result);
     }
   }
-  sql.connect(config, function (err) {
-    if(err) console.log(err);
-    const request = new sql.Request()
-    // insert data
-    insertData.forEach((item) => {
-      request.query(`insert into SODInformation values ('${item.FTPFileName}', '${item.OBTNumber}', '${item.OrderNo}', '${item.ProductNo}', '${item.MappingSTDNo}', '${item.STDNo}', '${item.StatusID}', '${item.StatusDescription}', '${item.GoodsEnterDate}', '${item.CreateDate}')`, (err, result)=> {
-        if (err) throw err;
-        console.log('insert success!');
-      });
-    })
-    // select table 
-    if (req) {
-      request.query('select * from SODInformation', function(err, recordset){
-        if (err) throw err;
-        res.send(recordset);
-      });
-    }
-  });
+  catch(err){
+    console.log(err)
+  }
 }
 
 module.exports = connectMSSQL;
