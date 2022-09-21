@@ -12,7 +12,7 @@ async function connectMSSQL(req, res) {
     })
     if (req) {
       const result = await sql.query('select * from SODInformation where cast(GoodsEnterDate as date) = cast( getdate() as date )')
-      res.send(result);
+      res.json(result);
     }
   }
   catch(err){

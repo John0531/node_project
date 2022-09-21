@@ -1,12 +1,14 @@
 const env = 'dev' // ! 改變環境
 
 const dev = {
+    ENV: 'dev',
     DB_CONFIG_PWD: 'wcp@ssw0rd',
     DB_CONFIG_SERVER : '172.28.234.31',
     SMTP_CONFIG_IP : '172.28.233.14',
     EMALL_API_URL : 'https://dev.yesgogogo.com/emall'
 }
 const prod = {
+    ENV: 'prod',
     DB_CONFIG_PWD: 'YgG#0722%',
     DB_CONFIG_SERVER : '172.28.242.31',
     SMTP_CONFIG_IP : '172.28.241.18',

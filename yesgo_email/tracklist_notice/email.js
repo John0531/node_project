@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const envObj = require('../../env')
-const getCartInfo = require('./getCartInfo')
+const getTracklistInfo = require('./getTracklistInfo')
 
 async function sendEmail(){
   const mailTransport = nodemailer.createTransport({
@@ -10,23 +10,23 @@ async function sendEmail(){
   });
   try{
     // * 取得會員購物車資訊
-    const cartInfo = await getCartInfo()
-    console.log(cartInfo)
-    cartInfo.forEach((members) => {
-      let cartStr = ''
-      members.products.forEach((product)=>{
-        cartStr += `<tr>
+    const tracklistInfo = await getTracklistInfo()
+    console.log(tracklistInfo)
+    tracklistInfo.forEach((members) => {
+      let trackStr = ''
+      members.tracklist.forEach((product)=>{
+        trackStr += `<tr>
         <td class="card-img">
-          <a href="https://www.yesgogogo.com/productboard/product/${product.ProductId}">
-            <img style="width: 100%;padding:10px;" src="https://yesgoimages.s3.ap-northeast-1.amazonaws.com/Original/${product.ProductId}.jpg" alt="">
+          <a href="https://www.yesgogogo.com/productboard/product/${product.varProd_No}">
+            <img style="width: 100%;padding:10px;" src="https://yesgoimages.s3.ap-northeast-1.amazonaws.com/Original/${product.varProd_No}.jpg" alt="">
           </a>
         </td>
         <td class="card-text">
-          <a style="color:#000" href="https://www.yesgogogo.com/productboard/product/${product.ProductId}">
-            <div class="card-name">${product.ProductName}</div>
+          <a style="color:#000" href="https://www.yesgogogo.com/productboard/product/${product.varProd_No}">
+            <div class="card-name">${product.varPROD_NAME}</div>
             <div class="price-content">
-              <span class="old-price">$${product.CostPrice}</span>
-              <span class="price-cut" style="color:#F8412E;">特價$<span class="price">${product.SellPrice}</span></span>
+              <span class="old-price">$${product.intLIST_PRICE}</span>
+              <span class="price-cut" style="color:#F8412E;">特價$<span class="price">${product.sellprice}</span></span>
             </div>
           </a>
         </td>
@@ -38,7 +38,7 @@ async function sendEmail(){
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>購物車商品提醒信</title>
+        <title>追蹤清單商品提醒信</title>
         <style>
           *, *:after, *:before{
             box-sizing: border-box;
@@ -197,30 +197,30 @@ async function sendEmail(){
             </tr>
             <tr>
               <td class="email-title">
-                <p style="font-weight: bold;">Hi ${members.name}</p>
+                <p style="font-weight: bold;">Hi XXX</p>
                 <br>
                 <p>生活總是需要點療癒，</p>
                 <p>享受美食就是最好的方式，</p>
                 <p>讓自己開心一下~</p>
-                <p>提醒你yesgogogo購物車內還有你的商品，</p>
+                <p>提醒你yesgogogo追蹤清單內還有你的商品，</p>
                 <p>帶他回家吧~~</p>
               </td>
             </tr>
             <tr>
               <td>
-                <a style="margin-bottom: 10px;color:#fff" href="https://www.yesgogogo.com/checkoutboard/checkoutcartlist" class="btn login-btn">看看我的購物車</a>
+                <a style="margin-bottom: 10px;color:#fff" href="https://www.yesgogogo.com/memberboard/membercollection" class="btn login-btn">逛逛追蹤清單</a>
               </td>
             </tr>
             <tr>
               <td id="card-content">
                 <div class="card-title">
-                  <img style="vertical-align: middle;" src="https://yesgoimages.s3.ap-northeast-1.amazonaws.com/email/caricon.png" alt="">
-                  <span style="vertical-align: middle;">購物車內商品~帶我回家~</span>
+                  <img style="vertical-align: middle;" src="https://yesgoimages.s3.ap-northeast-1.amazonaws.com/email/loveicon.png" alt="">
+                  <span style="vertical-align: middle;">追蹤清單內商品~~</span>
                 </div>
                 <div class="content">
                   <table>
                     <tbody>
-                      ${cartStr}
+                      ${trackStr}
                     </tbody>
                   </table>
                 </div>
@@ -263,7 +263,7 @@ async function sendEmail(){
       const mailOptions = {
           from: 'yesgogogo@gmail.com',
           to: members.email,
-          subject: 'yesgogogo購物車商品通知',
+          subject: 'yesgogogo追蹤清單商品通知',
           html: html,
       };
       
