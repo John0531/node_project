@@ -7,12 +7,14 @@ async function getCartInfo(){
     // * 取得有購物車商品的會員資訊
     const result = await sql.query('select varMBR_ID,varCART_EMAILJSON from CART_JSON where varCART_EMAILJSON is not null')
     const cartInfo = result.recordset
+    console.log(cartInfo)
     let members = []
     cartInfo.forEach((item)=>{
       item.products = JSON.parse(item.varCART_EMAILJSON).Items
       delete item.varCART_EMAILJSON
       members.push(item.varMBR_ID)
     })
+    console.log(members)
     // * 取得會員 email
     const memberEmails = await getMemberEmail(members)
     memberEmails.forEach((item)=>{

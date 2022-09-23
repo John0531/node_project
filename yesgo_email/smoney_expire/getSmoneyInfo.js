@@ -26,5 +26,5 @@ async function getSmoneyInfo(){
     console.log(err)
   }
 }
-getSmoneyInfo()
+
 module.exports = getSmoneyInfo

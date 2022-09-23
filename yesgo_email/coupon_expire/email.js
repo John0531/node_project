@@ -255,7 +255,7 @@ async function sendEmail(){
               <td style="padding-top:40px">
                 <small>商品實際資訊以網站為主</small>
                 <p>【聯邦集團旗下全台第一家美食特色電商】</p>
-                <p style="color:#4285f4">「yesgogogo 即時購」</p>
+                <p><a href="https://www.yesgogogo.com/" style="color:#4285f4">「yesgogogo 即食購」</a></p>
                 <p>- 在地美食、安心品質 -</p>
               </td>
             </tr>
@@ -285,7 +285,7 @@ async function sendEmail(){
       </body>
       </html>`
       const mailOptions = {
-          from: 'yesgogogo@gmail.com',
+          from: envObj.EMAIL_SENDER,
           to: members.email,
           subject: 'yesgogogo折價券到期通知',
           html: html,

@@ -155,7 +155,7 @@ async function sendEmail(){
             }
             .card-text{
               width: 60%;
-              padding: 10px 0;
+              padding: 10px 0 10px 15px;
             }
             .card-name{
               font-size: 16px;
@@ -203,7 +203,7 @@ async function sendEmail(){
                 <p>享受美食就是最好的方式，</p>
                 <p>讓自己開心一下~</p>
                 <p>提醒你yesgogogo購物車內還有你的商品，</p>
-                <p>帶他回家吧~~</p>
+                <p>帶它回家吧~~</p>
               </td>
             </tr>
             <tr>
@@ -230,7 +230,7 @@ async function sendEmail(){
               <td style="padding-top:40px">
                 <small>商品實際資訊以網站為主</small>
                 <p>【聯邦集團旗下全台第一家美食特色電商】</p>
-                <p style="color:#4285f4">「yesgogogo 即時購」</p>
+                <p><a href="https://www.yesgogogo.com/" style="color:#4285f4">「yesgogogo 即食購」</a></p>
                 <p>- 在地美食、安心品質 -</p>
               </td>
             </tr>
@@ -261,7 +261,7 @@ async function sendEmail(){
       
       </html>`
       const mailOptions = {
-          from: 'yesgogogo@gmail.com',
+          from: envObj.EMAIL_SENDER,
           to: members.email,
           subject: 'yesgogogo購物車商品通知',
           html: html,

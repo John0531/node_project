@@ -6,7 +6,7 @@ const cors = require('cors');
 const fb_writeCSV = require('./fb_writeCSV')
 const processFile = require('./Papa_report/processFile')
 const bp = require('body-parser')
-const email_test = require('./yesgo_email/tracklist_notice/email')
+const email_test = require('./yesgo_email/cart_notice/email')
 
 const app = express();
 const PORT = 3033;
