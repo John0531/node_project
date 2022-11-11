@@ -14,7 +14,7 @@ const prod = {
     DB_CONFIG_PWD: 'YgG#0722%',
     DB_CONFIG_SERVER : '172.28.242.31',
     SMTP_CONFIG_IP : '172.28.241.18',
-    EMALL_API_URL : 'https://www.yesgogogo.com/emall'
+    EMALL_API_URL : 'https://localhost/emall'
 }
 
 let envObj = {}

@@ -1,9 +1,11 @@
 const rp = require('request-promise');
-const cheerio = require('cheerio')
+const cheerio = require('cheerio');
+const sql = require('../dbConnection')
 
 const crawler = {
-    getProductPrice:async function(queryString){
-        const encodedStr = encodeURI(queryString)
+    getProductPrice:async function(searchInfo){
+				crawler.recordCrawlerInfo(searchInfo) // ? 紀錄比價資訊
+        const encodedStr = encodeURI(searchInfo.keyword)
         const options = {
             method: 'GET',
             url: `https://biggo.com.tw/s/?q=${encodedStr}`,
@@ -13,7 +15,7 @@ const crawler = {
         }
         try {
             const $ = await rp(options)
-            console.log($('.list-desc'))
+            // console.log($('.list-desc'))
             const List = $('.list-desc').map((index,obj) => {
                 return {
                     name: $(obj).find('.list-product-name a').text().trim(),
@@ -32,12 +34,22 @@ const crawler = {
                 item.price = parseInt(item.price)
                 item.href = `https://biggo.com.tw/${item.href}`
             })
-            console.log(returnData)
+            // console.log(returnData)
             return returnData
         }
         catch(err){
             console.log(err)
         }
+    },
+		// ? 將比價紀錄存進DB
+    recordCrawlerInfo: async function(searchInfo) {
+			try{
+				await sql.dbConnection()
+				await sql.query(`insert into PROD_CRAWLER_KEYWORD_LOG (varUSER_ID,varPROD_NO,varKEYWORD) values ('${searchInfo.userId}','${searchInfo.productId}','${searchInfo.keyword}')`)
+				console.log('成功紀錄比價資訊')
+			}catch(err){
+				console.log(err)
+			}
     }
 }
 

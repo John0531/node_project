@@ -3,9 +3,10 @@ const router = express.Router()
 const crawler = require('./crawler');
 const keyword = require('./keyword');
 
-router.get('/SearchProductPrice', async(req,res)=> {
-  if (req.query.q) {
-      const priceInfo = await crawler.getProductPrice(req.query.q)
+// ? 產品比價 api
+router.post('/SearchProductPrice', async(req,res)=> {
+  if (req.body&&req.body.keyword&&req.body.userId) {
+      const priceInfo = await crawler.getProductPrice(req.body)
       if (priceInfo.length===0){
           res.status(200).json({message:'查無商品資料', rtncode:404})
           return
