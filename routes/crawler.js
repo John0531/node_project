@@ -38,7 +38,7 @@ const crawler = {
             return returnData
         }
         catch(err){
-            console.log(err)
+            console.error(err)
         }
     },
 		// ? 將比價紀錄存進DB
@@ -48,7 +48,7 @@ const crawler = {
 				await sql.query(`insert into PROD_CRAWLER_KEYWORD_LOG (varUSER_ID,varPROD_NO,varKEYWORD) values ('${searchInfo.userId}','${searchInfo.productId}','${searchInfo.keyword}')`)
 				console.log('成功紀錄比價資訊')
 			}catch(err){
-				console.log(err)
+				console.error(err)
 			}
     }
 }

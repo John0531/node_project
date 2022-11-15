@@ -21,7 +21,7 @@ async function csv_generate(){
     // await workbook.csv.writeFile('D:/Excel/Test.csv',{formatterOptions:{writeBOM:true}});
   }
   catch(err){
-    console.log(err)
+    console.error(err)
   }
 }
 csv_generate()

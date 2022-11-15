@@ -13,7 +13,7 @@ async function getMemberEmail(members){
     return res.data.info
   }
   catch(err){
-    console.log(err)
+    console.error(err)
   }
 }
 

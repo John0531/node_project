@@ -42,7 +42,7 @@ async function crawler_record(){
     console.log('報表產生成功')
     sendEmail()
   }catch(err){
-    console.log(err)
+    console.error(err)
   }
 }
 

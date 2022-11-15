@@ -9,7 +9,7 @@ const keyword = {
       return result.recordset
     }
     catch(err){
-      console.log(err)
+      console.error(err)
     }
   },
   saveKeyword:async function(keywordInfo){
@@ -33,7 +33,7 @@ const keyword = {
       }
     }
     catch(err){
-      console.log(err)
+      console.error(err)
     }
   }
 }

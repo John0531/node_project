@@ -8,7 +8,7 @@ async function getHotProduct(req, res) {
     return result.recordset
   }
   catch(err) {
-    console.log(err)
+    console.error(err)
   }
 }
 

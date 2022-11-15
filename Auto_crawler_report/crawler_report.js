@@ -60,7 +60,7 @@ async function crawler_report(){
     console.log('報表產生成功')
     sendEmail()
   }catch(err){
-    console.log(err)
+    console.error(err)
   }
 }
 

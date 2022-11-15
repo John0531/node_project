@@ -17,7 +17,7 @@ async function writeCSV(){
         console.log('write successful')
     }
     catch(err){
-        console.log(err)
+        console.error(err)
     }
 }
 

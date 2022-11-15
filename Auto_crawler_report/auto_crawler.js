@@ -15,6 +15,9 @@ async function auto_crawler(){
       })
       console.log(`Result Product Number: ${compareResult.length}`)
       for(let j=0;j<compareResult.length;j++){
+        crawlerProducts[i].varPROD_NAME = crawlerProducts[i].varPROD_NAME.replaceAll(`'`,'')
+        crawlerProducts[i].varKEY_WORDS = crawlerProducts[i].varKEY_WORDS.replaceAll(`'`,'')
+        compareResult[j].name = compareResult[j].name.replaceAll(`'`,'')
         await sql.query(`INSERT INTO PROD_CRAWLER_KEYWORD_RESULT (varPROD_NO,varPROD_NAME,varKEYWORD,intSELL_PRICE,varRESULT_PROD_MALL,varRESULT_PROD_NAME,intRESULT_SELL_PRICE)
       VALUES ('${crawlerProducts[i].varPROD_NO}','${crawlerProducts[i].varPROD_NAME}','${crawlerProducts[i].varKEY_WORDS}',${crawlerProducts[i].intSELL_PRICE},'${compareResult[j].mall}','${compareResult[j].name}',${compareResult[j].price})`)
         console.log('insert success')
@@ -22,7 +25,7 @@ async function auto_crawler(){
     }
     console.log('比價結果寫入完成')
   }catch(err){
-    console.log(err)
+    console.error(err)
   }
 }
 

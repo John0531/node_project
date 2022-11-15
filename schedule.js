@@ -107,10 +107,10 @@ function crawler_Report(){
 // ?  自動比價報表
 function auto_Crawler_Report(){
   // ? 自動比價
-  // schedule.scheduleJob({hour: 9, minute: 30, dayOfWeek: [1,2,3,4,5]}, function(){
-  //   console.log(new Date(), 'auto_crawler email send');
-  //   auto_crawler()
-  // });
+  schedule.scheduleJob({hour: 9, minute: 30, dayOfWeek: [1,2,3,4,5]}, function(){
+    console.log(new Date(), 'auto_crawler email send');
+    auto_crawler()
+  });
   // ? 產生比價報表
   schedule.scheduleJob({hour: 11, minute: 16, dayOfWeek: [1,2,3,4,5]}, function(){
     console.log(new Date(), 'auto_crawler_report email send');

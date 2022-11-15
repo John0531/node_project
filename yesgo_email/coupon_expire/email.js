@@ -293,7 +293,7 @@ async function sendEmail(){
         
       mailTransport.sendMail(mailOptions, function(error, info){
           if (error) {
-            console.log(error);
+            console.error(error);
           } else {
             console.log('Email sent: ' + info.response);
           }
@@ -301,7 +301,7 @@ async function sendEmail(){
     });
   }
   catch(err){
-    console.log(err)
+    console.error(err)
   }
 }
 module.exports = sendEmail;
