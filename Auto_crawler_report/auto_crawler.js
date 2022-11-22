@@ -5,13 +5,14 @@ const crawler = require('../routes/crawler')
 async function auto_crawler(){
   try{
     await sql.dbConnection()
+    await sql.query(`delete PROD_CRAWLER_KEYWORD_RESULT where dtCreateDate < DATEADD(DAY,-7,getdate())`)
     const crawlerProducts = await (await sql.query(`SELECT * FROM VW_PROD_CRAWLER_KEYWORD_LIST`)).recordset
     console.log(crawlerProducts)
     for(let i=0;i<crawlerProducts.length;i++){
       console.log(`${i+1}/${crawlerProducts.length}`)
       let compareResult = await crawler.getProductPrice({keyword:crawlerProducts[i].varKEY_WORDS})
       compareResult = compareResult.filter((item)=>{
-        return item.price<crawlerProducts[i].intSELL_PRICE
+        return item.price<crawlerProducts[i].intSELL_PRICE && !item.mall.includes('蝦皮') && !item.mall.includes('露天')
       })
       console.log(`Result Product Number: ${compareResult.length}`)
       for(let j=0;j<compareResult.length;j++){
