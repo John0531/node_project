@@ -4,7 +4,6 @@ const sql = require('../dbConnection')
 
 const crawler = {
     getProductPrice:async function(searchInfo){
-				crawler.recordCrawlerInfo(searchInfo) // ? 紀錄比價資訊
         const encodedStr = encodeURI(searchInfo.keyword)
         const options = {
             method: 'GET',
@@ -40,16 +39,6 @@ const crawler = {
         catch(err){
             console.error(err)
         }
-    },
-		// ? 將比價紀錄存進DB
-    recordCrawlerInfo: async function(searchInfo) {
-			try{
-				await sql.dbConnection()
-				await sql.query(`insert into PROD_CRAWLER_KEYWORD_LOG (varUSER_ID,varPROD_NO,varKEYWORD) values ('${searchInfo.userId}','${searchInfo.productId}','${searchInfo.keyword}')`)
-				console.log('成功紀錄比價資訊')
-			}catch(err){
-				console.error(err)
-			}
     }
 }
 

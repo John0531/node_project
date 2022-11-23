@@ -12,8 +12,8 @@ function sendEmail(){
     const now = moment().format('YYYYMMDD_HHmm')
     const mailOptions = {
         from: 'yesgogogo@uitc.com.tw',
-        to: 'shengzhang@uitc.com.tw,donaldwang@uitc.com.tw',
-        // cc: 'shengzhang@uitc.com.tw,donaldwang@uitc.com.tw',
+        to: 'angelashen@uitc.com.tw,cindylin@uitc.com.tw,ipingfu@uitc.com.tw',
+        cc: 'shengzhang@uitc.com.tw,donaldwang@uitc.com.tw',
         subject: 'yesgogogo 商品比價報表',
         text: 'yesgogogo 商品比價報表',
         attachments: [

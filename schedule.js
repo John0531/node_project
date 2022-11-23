@@ -7,7 +7,6 @@ const cart_notice = require('./yesgo_email/cart_notice/email')
 const coupon_expire = require('./yesgo_email/coupon_expire/email')
 const smoney_expire = require('./yesgo_email/smoney_expire/email')
 const tracklist_notice = require('./yesgo_email/tracklist_notice/email')
-const crawler_report = require('./Crawler_report/crawler_record')
 const auto_crawler = require('./Auto_crawler_report/auto_crawler')
 const auto_crawler_report = require('./Auto_crawler_report/crawler_report')
 
@@ -92,27 +91,15 @@ function smoney_Expire(){
   });
 }
 
-// ? 比價搜尋報表
-function crawler_Report(){
-  schedule.scheduleJob({hour: 9, minute: 30, dayOfWeek: [1,2,3,4,5]}, function(){
-    console.log(new Date(), 'crawler_report email send');
-    crawler_report()
-  });
-  schedule.scheduleJob({hour: 14, minute: 0, dayOfWeek: [1,2,3,4,5]}, function(){
-    console.log(new Date(), 'crawler_report email send');
-    crawler_report()
-  });
-}
-
 // ?  自動比價報表
 function auto_Crawler_Report(){
   // ? 自動比價
-  schedule.scheduleJob({hour: 9, minute: 30, dayOfWeek: [1,2,3,4,5]}, function(){
+  schedule.scheduleJob({hour: 3, minute: 0, dayOfWeek: [1,2,3,4,5]}, function(){
     console.log(new Date(), 'auto_crawler email send');
     auto_crawler()
   });
   // ? 產生比價報表
-  schedule.scheduleJob({hour: 11, minute: 16, dayOfWeek: [1,2,3,4,5]}, function(){
+  schedule.scheduleJob({hour: 9, minute: 0, dayOfWeek: [1,2,3,4,5]}, function(){
     console.log(new Date(), 'auto_crawler_report email send');
     auto_crawler_report()
   });
@@ -122,7 +109,6 @@ function auto_Crawler_Report(){
 if(envObj.ENV === 'dev'){
   tcat_ftp()
   fb_CSV()
-  crawler_Report()
   auto_Crawler_Report()
 } else if (envObj.ENV === 'prod') {
   tcat_ftp()
