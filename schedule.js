@@ -94,7 +94,7 @@ function smoney_Expire(){
 // ?  自動比價報表
 function auto_Crawler_Report(){
   // ? 自動比價
-  schedule.scheduleJob({hour: 3, minute: 0, dayOfWeek: [1,2,3,4,5]}, function(){
+  schedule.scheduleJob({hour: 3, minute: 0}, function(){
     console.log(new Date(), 'auto_crawler email send');
     auto_crawler()
   });
@@ -109,7 +109,6 @@ function auto_Crawler_Report(){
 if(envObj.ENV === 'dev'){
   tcat_ftp()
   fb_CSV()
-  auto_Crawler_Report()
 } else if (envObj.ENV === 'prod') {
   tcat_ftp()
   papa_report()
