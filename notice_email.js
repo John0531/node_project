@@ -16,7 +16,7 @@ function sendEmail(Subject,Text){
         subject: Subject,
         text: Text,
     };
-       
+      
     mailTransport.sendMail(mailOptions, function(error, info){
         if (error) {
           console.error(error);

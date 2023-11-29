@@ -13,7 +13,7 @@ const auto_crawler_report = require('./Auto_crawler_report/crawler_report')
 // ? 黑貓 ftp 排程
 function tcat_ftp(){
 	const rule = new schedule.RecurrenceRule();
-  rule.hour = [6,19];
+  rule.hour = [9,21];
   rule.minute = 0;
   schedule.scheduleJob(rule, function(){
     console.log(new Date(), 'Tcat ftp');
@@ -113,7 +113,4 @@ if(envObj.ENV === 'dev'){
   tcat_ftp()
   papa_report()
   fb_CSV()
-  cart_Notice()
-  tracklist_Notice()
-  auto_Crawler_Report()
 }

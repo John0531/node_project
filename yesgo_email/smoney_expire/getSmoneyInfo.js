@@ -4,7 +4,7 @@ const sql = require('../../dbConnection')
 async function getSmoneyInfo(){
   try{
     await sql.dbConnection()
-    // * 取得所有會員到期折價券
+    // * 取得所有會員到期購物金
     const result = await sql.query(`SELECT  suti.varMBR_ID,sum(suti.intDRAW_ON_AMT) as smoneySum FROM SMONEY_USED_TRACK_INFO as suti join MBR_PROFILE as mp on suti.varMBR_ID= mp.varMBR_ID where mp.varENABLE='Y' group by  suti.varMBR_ID  having sum(intDRAW_ON_AMT)>0`)
     const members = []
     const smoneyInfo = result.recordset

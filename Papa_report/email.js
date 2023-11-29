@@ -13,7 +13,7 @@ function sendEmail(){
     const mailOptions = {
         from: 'papawash@uitc.com.tw',
         to: '500@uitc.com.tw,141@uitc.com.tw',
-        cc: 'shengzhang@uitc.com.tw,donaldwang@uitc.com.tw,davidchen@uitc.com.tw',
+        cc: 'shengzhang@uitc.com.tw,donaldwang@uitc.com.tw,davidchen@uitc.com.tw,louislin@uitc.com.tw',
         subject: 'papawash出貨報表',
         text: 'papawash出貨報表',
         attachments: [
